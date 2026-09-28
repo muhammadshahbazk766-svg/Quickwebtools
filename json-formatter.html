@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter – Format and Validate JSON Online Free</title>
+  <meta name="description" content="Format, validate and minify JSON online with this free JSON formatter and validator. Perfect for developers and APIs.">
+  <meta name="keywords" content="JSON formatter, JSON validator, JSON minify, JSON beautifier, format JSON">
+  <meta name="author" content="QuickWebTools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quickwebtools.com/json-formatter.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="JSON Formatter – Free Online Tool">
+  <meta property="og:description" content="Format, validate, and minify JSON instantly for developers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quickwebtools.com/json-formatter.html">
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Formatter",
+    "description": "Free online JSON formatter to format, validate, and minify JSON data",
+    "url": "https://quickwebtools.com/json-formatter.html"
+  }
+  </script>
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .json-input-output {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .json-column {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .json-column h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    
+    .json-column textarea {
+      flex: 1;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.9rem;
+      min-height: 300px;
+    }
+    
+    @media (max-width: 768px) {
+      .json-input-output {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">QuickWebTools</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+        <a href="/#about">About</a>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container-narrow">
+    <h1>JSON Formatter</h1>
+    <p class="text-muted">Format, validate and minify JSON instantly. Perfect for developers working with APIs and data.</p>
+
+    <!-- Ad: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- Main Formatter -->
+    <div class="calculator" style="padding: 1.5rem;">
+      <h3>JSON Formatter & Validator</h3>
+      
+      <div class="json-input-output">
+        <div class="json-column">
+          <h4>Input JSON</h4>
+          <textarea id="json-input" placeholder='Paste your JSON here...'></textarea>
+        </div>
+        <div class="json-column">
+          <h4>Output JSON</h4>
+          <textarea id="json-output" readonly placeholder="Formatted output will appear here"></textarea>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.5rem;">
+        <button onclick="formatJSON()" class="btn btn-small" style="font-size: 0.9rem;">Format</button>
+        <button onclick="validateJSON()" class="btn btn-small" style="font-size: 0.9rem;">Validate</button>
+        <button onclick="minifyJSON()" class="btn btn-small" style="font-size: 0.9rem;">Minify</button>
+        <button onclick="clearJSON()" class="btn btn-secondary btn-small" style="font-size: 0.9rem;">Clear</button>
+        <button onclick="copyOutput()" class="btn btn-secondary btn-small" style="font-size: 0.9rem;">Copy Output</button>
+      </div>
+
+      <div id="error-message" style="display: none; margin-top: 1rem;">
+        <div class="alert alert-error"></div>
+      </div>
+
+      <div id="success-message" style="display: none; margin-top: 1rem;">
+        <div class="alert alert-success"></div>
+      </div>
+    </div>
+
+    <!-- Ad: Between Content -->
+    <div class="ad-container mt-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- What is JSON? -->
+    <section class="section">
+      <h2>What is JSON?</h2>
+      
+      <p>JSON (JavaScript Object Notation) is a lightweight data format that's easy for humans to read and write, and easy for machines to parse and generate. It's based on a subset of the JavaScript programming language but is independent of any programming language.</p>
+
+      <h3>JSON Structure</h3>
+      <p>JSON is built on two basic structures:</p>
+      <ul>
+        <li><strong>Objects:</strong> Unordered collections of key/value pairs, enclosed in curly braces {}</li>
+        <li><strong>Arrays:</strong> Ordered lists of values, enclosed in square brackets []</li>
+      </ul>
+
+      <h3>Data Types in JSON</h3>
+      <ul>
+        <li><strong>String:</strong> Text enclosed in double quotes: "hello"</li>
+        <li><strong>Number:</strong> Integer or float: 42, 3.14</li>
+        <li><strong>Boolean:</strong> true or false</li>
+        <li><strong>Null:</strong> Represents empty or no value: null</li>
+        <li><strong>Object:</strong> {"key": "value"}</li>
+        <li><strong>Array:</strong> [1, 2, 3]</li>
+      </ul>
+
+      <h3>Why Use JSON?</h3>
+      <ul>
+        <li>Lightweight and efficient for data transmission</li>
+        <li>Easy to read and write for humans</li>
+        <li>Supported by virtually all programming languages</li>
+        <li>Industry standard for APIs and web services</li>
+        <li>Used by most modern applications</li>
+      </ul>
+    </section>
+
+    <!-- How to Format JSON -->
+    <section class="section">
+      <h2>How to Format JSON</h2>
+      
+      <h3>Unformatted JSON (Minified)</h3>
+      <div class="card" style="background: var(--bg-primary); border: 2px solid var(--border-color);">
+        <p style="font-family: monospace; font-size: 0.9rem; margin: 0; word-break: break-all;">{"name":"John","age":30,"city":"New York","hobbies":["reading","gaming"]}</p>
+      </div>
+
+      <h3>Formatted JSON (Pretty-Printed)</h3>
+      <div class="card" style="background: var(--bg-primary); border: 2px solid var(--border-color);">
+        <p style="font-family: monospace; font-size: 0.9rem; margin: 0; white-space: pre;">
+{
+  "name": "John",
+  "age": 30,
+  "city": "New York",
+  "hobbies": [
+    "reading",
+    "gaming"
+  ]
+}
+        </p>
+      </div>
+
+      <p>Our formatter adds proper indentation and line breaks to make JSON more readable. This is especially useful for large or complex JSON data.</p>
+    </section>
+
+    <!-- JSON Examples -->
+    <section class="section">
+      <h2>JSON Examples</h2>
+      
+      <h3>Example 1: Simple Object</h3>
+      <div class="card">
+        <p style="font-family: monospace; white-space: pre; margin: 0; font-size: 0.9rem;">
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@example.com"
+}
+        </p>
+      </div>
+
+      <h3>Example 2: Array of Objects</h3>
+      <div class="card">
+        <p style="font-family: monospace; white-space: pre; margin: 0; font-size: 0.9rem;">
+{
+  "users": [
+    {"id": 1, "name": "John", "active": true},
+    {"id": 2, "name": "Jane", "active": false},
+    {"id": 3, "name": "Bob", "active": true}
+  ]
+}
+        </p>
+      </div>
+
+      <h3>Example 3: Nested Objects</h3>
+      <div class="card">
+        <p style="font-family: monospace; white-space: pre; margin: 0; font-size: 0.9rem;">
+{
+  "user": {
+    "profile": {
+      "name": "John Doe",
+      "location": {
+        "city": "New York",
+        "country": "USA"
+      }
+    }
+  }
+}
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What's the difference between formatting and minifying?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p><strong>Formatting</strong> adds indentation and line breaks to make JSON readable by humans. <strong>Minifying</strong> removes all unnecessary whitespace to reduce file size for storage or transmission. Both represent the same data.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What does "invalid JSON" mean?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Invalid JSON means the syntax doesn't follow the JSON specification. Common errors include: missing quotes around keys, single quotes instead of double quotes, trailing commas, unmatched braces or brackets, or unescaped special characters.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I use this for API responses?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! This tool is perfect for working with API responses. Copy the JSON response from your API, paste it here, and click "Format" to make it readable. You can also validate to check if the response is valid JSON.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How large can JSON files be?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Our formatter works with large JSON files, but very large files may take a moment to process. For the best experience, keep files under a few MB. Extremely large files (over 10MB) may need to be processed in your code or a specialized tool.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is my JSON data stored or seen by anyone?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>No! All processing happens in your browser. Your JSON data is never sent to any server or stored anywhere. Your data and privacy are completely protected.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What characters need escaping in JSON?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>In JSON strings, these characters must be escaped: quotation marks ("), backslashes (\), newlines (\n), tabs (\t), and control characters. For example, to include a quotation mark in a string: "He said \"Hello\"" or to include a backslash: "Path: C:\\Users"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Developer Tools -->
+    <section class="section">
+      <h2>Related Developer Tools</h2>
+      <div class="grid grid-2">
+        <a href="word-counter.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Word Counter</h3>
+          <p>Count text characters and analyze content.</p>
+        </a>
+        <a href="percentage-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Percentage Calculator</h3>
+          <p>Calculate percentages and math operations.</p>
+        </a>
+        <a href="age-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Age Calculator</h3>
+          <p>Calculate ages and date differences.</p>
+        </a>
+        <a href="bmi-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">BMI Calculator</h3>
+          <p>Calculate Body Mass Index.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Ad: Bottom -->
+    <div class="ad-container mt-4 mb-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>QuickWebTools</h4>
+        <p>Fast, free online tools for everyday tasks.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="word-counter.html">Word Counter</a></li>
+          <li><a href="json-formatter.html">JSON Formatter</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>More</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 QuickWebTools. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function formatJSON() {
+      const input = document.getElementById('json-input').value;
+      const errorDiv = document.getElementById('error-message');
+      const successDiv = document.getElementById('success-message');
+
+      if (!input.trim()) {
+        errorDiv.innerHTML = '<div class="alert alert-error">Please enter JSON</div>';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(input);
+        const formatted = JSON.stringify(parsed, null, 2);
+        document.getElementById('json-output').value = formatted;
+        errorDiv.style.display = 'none';
+        successDiv.innerHTML = '<div class="alert alert-success">JSON formatted successfully!</div>';
+        successDiv.style.display = 'block';
+      } catch (error) {
+        errorDiv.innerHTML = '<div class="alert alert-error"><strong>Invalid JSON:</strong> ' + error.message + '</div>';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+      }
+    }
+
+    function validateJSON() {
+      const input = document.getElementById('json-input').value;
+      const errorDiv = document.getElementById('error-message');
+      const successDiv = document.getElementById('success-message');
+
+      if (!input.trim()) {
+        errorDiv.innerHTML = '<div class="alert alert-error">Please enter JSON</div>';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+        return;
+      }
+
+      try {
+        JSON.parse(input);
+        errorDiv.style.display = 'none';
+        successDiv.innerHTML = '<div class="alert alert-success">✓ Valid JSON! No errors found.</div>';
+        successDiv.style.display = 'block';
+      } catch (error) {
+        errorDiv.innerHTML = '<div class="alert alert-error"><strong>Invalid JSON:</strong> ' + error.message + '</div>';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+      }
+    }
+
+    function minifyJSON() {
+      const input = document.getElementById('json-input').value;
+      const errorDiv = document.getElementById('error-message');
+      const successDiv = document.getElementById('success-message');
+
+      if (!input.trim()) {
+        errorDiv.innerHTML = '<div class="alert alert-error">Please enter JSON</div>';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(input);
+        const minified = JSON.stringify(parsed);
+        document.getElementById('json-output').value = minified;
+        errorDiv.style.display = 'none';
+        successDiv.innerHTML = '<div class="alert alert-success">JSON minified successfully!</div>';
+        successDiv.style.display = 'block';
+      } catch (error) {
+        errorDiv.innerHTML = '<div class="alert alert-error"><strong>Invalid JSON:</strong> ' + error.message + '</div>';
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+      }
+    }
+
+    function clearJSON() {
+      if (document.getElementById('json-input').value === '' && document.getElementById('json-output').value === '') {
+        return;
+      }
+      
+      if (confirm('Clear all JSON?')) {
+        document.getElementById('json-input').value = '';
+        document.getElementById('json-output').value = '';
+        document.getElementById('error-message').style.display = 'none';
+        document.getElementById('success-message').style.display = 'none';
+      }
+    }
+
+    function copyOutput() {
+      const output = document.getElementById('json-output').value;
+      if (!output) {
+        showNotification('No output to copy. Format JSON first.', 'error');
+        return;
+      }
+      copyToClipboard(output);
+    }
+
+    // Allow Ctrl+Enter to format
+    document.getElementById('json-input')?.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'Enter') {
+        formatJSON();
+      }
+    });
+  </script>
+</body>
+</html>

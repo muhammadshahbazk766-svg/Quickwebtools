@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Counter – Count Words and Characters Online Free</title>
+  <meta name="description" content="Count words, characters, sentences and paragraphs instantly with this free online word counter. Calculate reading time and analyze your text.">
+  <meta name="keywords" content="word counter, character counter, word count, text counter, reading time">
+  <meta name="author" content="QuickWebTools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quickwebtools.com/word-counter.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Word Counter – Free Online Tool">
+  <meta property="og:description" content="Count words, characters, and calculate reading time instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quickwebtools.com/word-counter.html">
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Word Counter",
+    "description": "Free online word counter to count words, characters, and calculate reading time",
+    "url": "https://quickwebtools.com/word-counter.html"
+  }
+  </script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">QuickWebTools</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+        <a href="/#about">About</a>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container-narrow">
+    <h1>Word Counter</h1>
+    <p class="text-muted">Count words, characters, sentences and paragraphs instantly. Calculate reading time for your content.</p>
+
+    <!-- Ad: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator">
+      <h3>Paste or Type Your Text</h3>
+      
+      <textarea id="text-input" placeholder="Paste your text here or start typing..." oninput="updateCounts()"></textarea>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 1rem;">
+        <button onclick="clearText()" class="btn btn-secondary btn-small">Clear</button>
+        <button onclick="copyText()" class="btn btn-secondary btn-small">Copy Text</button>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Statistics</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem;">
+        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--primary-color); text-align: center;">
+          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="word-count">0</div>
+          <div style="font-size: 0.9rem; color: var(--text-secondary);">Words</div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--primary-color); text-align: center;">
+          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="char-count">0</div>
+          <div style="font-size: 0.9rem; color: var(--text-secondary);">Characters</div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--primary-color); text-align: center;">
+          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="char-no-space-count">0</div>
+          <div style="font-size: 0.9rem; color: var(--text-secondary);">Chars (no spaces)</div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--primary-color); text-align: center;">
+          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="sentence-count">0</div>
+          <div style="font-size: 0.9rem; color: var(--text-secondary);">Sentences</div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--primary-color); text-align: center;">
+          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="paragraph-count">0</div>
+          <div style="font-size: 0.9rem; color: var(--text-secondary);">Paragraphs</div>
+        </div>
+        
+        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--primary-color); text-align: center;">
+          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="reading-time">0m</div>
+          <div style="font-size: 0.9rem; color: var(--text-secondary);">Reading Time</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad: Between Content -->
+    <div class="ad-container mt-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- How Word Counting Works -->
+    <section class="section">
+      <h2>How Word Counting Works</h2>
+      
+      <h3>What Each Metric Means</h3>
+      <ul>
+        <li><strong>Words:</strong> Individual words separated by spaces or punctuation. Contractions like "don't" count as one word.</li>
+        <li><strong>Characters:</strong> Every letter, number, and symbol including spaces.</li>
+        <li><strong>Characters (no spaces):</strong> Total characters excluding whitespace.</li>
+        <li><strong>Sentences:</strong> Segments ending with periods, question marks, or exclamation points.</li>
+        <li><strong>Paragraphs:</strong> Blocks of text separated by line breaks.</li>
+        <li><strong>Reading Time:</strong> Estimated time to read the text at average reading speed (200 words per minute).</li>
+      </ul>
+
+      <h3>Typical Word Counts</h3>
+      <ul>
+        <li><strong>Tweet:</strong> 30-50 words</li>
+        <li><strong>Short paragraph:</strong> 100-200 words</li>
+        <li><strong>Blog post:</strong> 800-2000 words</li>
+        <li><strong>Article:</strong> 1500-3000 words</li>
+        <li><strong>Short story:</strong> 5000-20000 words</li>
+        <li><strong>Novel:</strong> 70000-100000+ words</li>
+      </ul>
+
+      <h3>What Counts as a Word?</h3>
+      <p>Our word counter uses the standard definition of a word: any sequence of characters separated by spaces or punctuation. This means:</p>
+      <ul>
+        <li>Contractions (don't, it's, we'll) = 1 word each</li>
+        <li>Hyphenated words (well-known, mother-in-law) = typically 1 word</li>
+        <li>Numbers (123, 2023) = 1 word each</li>
+        <li>Abbreviations (Mr., Dr., etc.) = 1 word each</li>
+      </ul>
+    </section>
+
+    <!-- Example -->
+    <section class="section">
+      <h2>Example</h2>
+      
+      <div class="card">
+        <h4>Sample Text</h4>
+        <p>"Hello world! This is a sample sentence. Word counters are useful tools for writers, students, and content creators. They help track progress and analyze text statistics."</p>
+        
+        <h4 style="margin-top: 1.5rem;">Results</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Words:</strong> 30</li>
+          <li><strong>Characters:</strong> 180 (including spaces)</li>
+          <li><strong>Sentences:</strong> 4</li>
+          <li><strong>Reading time:</strong> Less than 1 minute</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Why is my word count different from another tool?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Different word counters may handle special cases differently (like hyphenated words, contractions, or numbers). Our counter uses the standard definition: words are separated by spaces or punctuation. Some tools may count differently, but the differences are usually small.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How is reading time calculated?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Reading time is based on an average reading speed of 200 words per minute. This is the typical speed for adults reading online content at a comfortable pace. Complex or technical material may take longer to read.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Does punctuation count as characters?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes. Commas, periods, apostrophes, and all other punctuation marks count as characters. Spaces also count as characters in the "Characters" count but not in "Characters (no spaces)".</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I use this for academic work?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! Our word counter is perfect for essays, assignments, and academic papers. Just paste your text and check if you've met word count requirements. However, always verify the count with your institution's standard if they have specific requirements.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is my text stored or analyzed?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>No! All text analysis happens in your browser. Your text is never sent to any server or stored anywhere. Your privacy is completely protected.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I count characters in a document?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! Copy the text from your document and paste it into our word counter. It will instantly show you all the statistics including word count, character count, and reading time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="section">
+      <h2>Related Tools</h2>
+      <div class="grid grid-2">
+        <a href="percentage-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Percentage Calculator</h3>
+          <p>Calculate percentages and changes.</p>
+        </a>
+        <a href="age-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Age Calculator</h3>
+          <p>Calculate exact age in years, months, days.</p>
+        </a>
+        <a href="bmi-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">BMI Calculator</h3>
+          <p>Calculate Body Mass Index instantly.</p>
+        </a>
+        <a href="json-formatter.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">JSON Formatter</h3>
+          <p>Format and validate JSON data.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Ad: Bottom -->
+    <div class="ad-container mt-4 mb-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>QuickWebTools</h4>
+        <p>Fast, free online tools for everyday tasks.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="word-counter.html">Word Counter</a></li>
+          <li><a href="json-formatter.html">JSON Formatter</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>More</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 QuickWebTools. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function updateCounts() {
+      const text = document.getElementById('text-input').value;
+
+      // Count words
+      const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+      
+      // Count characters
+      const characters = text.length;
+      
+      // Count characters without spaces
+      const charsNoSpace = text.replace(/\s/g, '').length;
+      
+      // Count sentences
+      const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+      
+      // Count paragraphs
+      const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0).length;
+      
+      // Calculate reading time (200 words per minute)
+      const readingTime = Math.ceil(words / 200);
+      const readingTimeText = readingTime < 1 ? 'Less than 1m' : readingTime + 'm';
+
+      // Update display
+      document.getElementById('word-count').textContent = words;
+      document.getElementById('char-count').textContent = characters;
+      document.getElementById('char-no-space-count').textContent = charsNoSpace;
+      document.getElementById('sentence-count').textContent = sentences;
+      document.getElementById('paragraph-count').textContent = paragraphs;
+      document.getElementById('reading-time').textContent = readingTimeText;
+    }
+
+    function clearText() {
+      if (document.getElementById('text-input').value.length === 0) return;
+      
+      if (confirm('Are you sure you want to clear all text?')) {
+        document.getElementById('text-input').value = '';
+        updateCounts();
+      }
+    }
+
+    function copyText() {
+      const text = document.getElementById('text-input').value;
+      if (text.length === 0) {
+        showNotification('No text to copy', 'error');
+        return;
+      }
+      
+      copyToClipboard(text);
+    }
+
+    // Initialize counts on load
+    document.addEventListener('DOMContentLoaded', updateCounts);
+  </script>
+</body>
+</html>

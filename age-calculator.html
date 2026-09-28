@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator – Calculate Your Exact Age Online</title>
+  <meta name="description" content="Calculate your exact age in years, months and days using our free online age calculator. Find out how many days until your next birthday.">
+  <meta name="keywords" content="age calculator, calculate age, birthday, age in days, how old am I">
+  <meta name="author" content="QuickWebTools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quickwebtools.com/age-calculator.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Age Calculator – Free Online Tool">
+  <meta property="og:description" content="Calculate your exact age in years, months and days instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quickwebtools.com/age-calculator.html">
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Age Calculator",
+    "description": "Free online age calculator to calculate exact age in years, months, and days",
+    "url": "https://quickwebtools.com/age-calculator.html"
+  }
+  </script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">QuickWebTools</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+        <a href="/#about">About</a>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container-narrow">
+    <h1>Age Calculator</h1>
+    <p class="text-muted">Calculate your exact age in years, months, and days. Find out how many days you've lived and when your next birthday is.</p>
+
+    <!-- Ad: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator">
+      <h3>Enter Your Date of Birth</h3>
+      
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" max="">
+      </div>
+
+      <button onclick="calculateAge()" class="btn btn-block">Calculate Age</button>
+
+      <div id="results" style="display: none;">
+        <div class="calculator-output">
+          <div style="text-align: center;">
+            <div style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem;">Your Age</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 4px solid var(--primary-color);">
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="years">0</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Years</div>
+              </div>
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 4px solid var(--primary-color);">
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="months">0</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Months</div>
+              </div>
+              <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 4px solid var(--primary-color);">
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color);" id="days">0</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Days</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <h4>Additional Information</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <strong>Total Days Lived:</strong> <span id="totalDays">0</span>
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <strong>Total Hours:</strong> <span id="totalHours">0</span>
+            </li>
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <strong>Total Minutes:</strong> <span id="totalMinutes">0</span>
+            </li>
+            <li style="padding: 0.5rem 0; margin-bottom: 0;">
+              <strong>Next Birthday In:</strong> <span id="daysUntil">Calculating...</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="error" style="display: none;">
+        <div class="alert alert-error"></div>
+      </div>
+    </div>
+
+    <!-- Ad: Between Content -->
+    <div class="ad-container mt-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- How It Works -->
+    <section class="section">
+      <h2>How the Age Calculator Works</h2>
+      
+      <h3>What It Calculates</h3>
+      <p>The age calculator computes your exact age by finding the difference between your date of birth and today's date. It breaks down the result into:</p>
+      <ul>
+        <li><strong>Years:</strong> Complete years from birth</li>
+        <li><strong>Months:</strong> Additional complete months beyond the years</li>
+        <li><strong>Days:</strong> Additional days beyond the months</li>
+        <li><strong>Total Days:</strong> The total number of days you've lived</li>
+        <li><strong>Days Until Birthday:</strong> How many days until your next birthday</li>
+      </ul>
+
+      <h3>How It's Calculated</h3>
+      <p>The calculator takes your birth date and compares it to today's date (or any date you choose). It then calculates:</p>
+      <ol>
+        <li>The number of complete years</li>
+        <li>The remaining months after accounting for years</li>
+        <li>The remaining days after accounting for months</li>
+        <li>The total number of days lived</li>
+        <li>The days remaining until the next birthday</li>
+      </ol>
+
+      <h3>Leap Years</h3>
+      <p>The calculator accounts for leap years automatically. A leap year occurs every 4 years (except for years divisible by 100, which are not leap years unless also divisible by 400). This means February has 29 days instead of 28 in leap years.</p>
+    </section>
+
+    <!-- Examples -->
+    <section class="section">
+      <h2>Example</h2>
+      
+      <div class="card">
+        <h4>Example Calculation</h4>
+        <p><strong>Date of Birth:</strong> January 15, 2000</p>
+        <p><strong>Current Date:</strong> September 28, 2026</p>
+        <p><strong>Result:</strong></p>
+        <ul>
+          <li>Age: 26 years, 8 months, and 13 days</li>
+          <li>Total Days: 9,766 days</li>
+          <li>Next Birthday: January 15, 2027 (109 days away)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Why does the calculator show months and days separately?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>This provides your exact age. Someone might be "26 years and 8 months" old, which is more precise than just saying "26 years." Months vary in length (28-31 days), so the calculator accounts for this accurately.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How are leap years handled?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>If your birthday is February 29 (leap day), the calculator will recognize this and calculate your age correctly. For non-leap years, your birthday is considered to be March 1 for age calculation purposes.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I calculate the age of someone else?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! Simply enter any date of birth and the calculator will show the age of that person or event as of today's date.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What's the difference between age in days and age in years?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Age in years is how we typically express age (e.g., "I'm 26 years old"). Age in days is the total number of days you've lived since birth, which is more precise for scientific or medical purposes.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is my birthdate stored anywhere?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>No! All calculations happen in your browser. Your birthdate is never sent to any server or stored anywhere. Your privacy is completely protected.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="section">
+      <h2>Related Tools</h2>
+      <div class="grid grid-2">
+        <a href="percentage-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Percentage Calculator</h3>
+          <p>Calculate percentages, increases, and decreases.</p>
+        </a>
+        <a href="bmi-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">BMI Calculator</h3>
+          <p>Calculate your Body Mass Index instantly.</p>
+        </a>
+        <a href="word-counter.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Word Counter</h3>
+          <p>Count words, characters, and reading time.</p>
+        </a>
+        <a href="json-formatter.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">JSON Formatter</h3>
+          <p>Format and validate JSON data.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Ad: Bottom -->
+    <div class="ad-container mt-4 mb-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>QuickWebTools</h4>
+        <p>Fast, free online tools for everyday tasks.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="word-counter.html">Word Counter</a></li>
+          <li><a href="json-formatter.html">JSON Formatter</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>More</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 QuickWebTools. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Set max date to today
+    document.getElementById('dob').max = new Date().toISOString().split('T')[0];
+
+    function calculateAge() {
+      const dobInput = document.getElementById('dob').value;
+      const errorDiv = document.getElementById('error');
+      const resultsDiv = document.getElementById('results');
+
+      if (!dobInput) {
+        errorDiv.innerHTML = '<div class="alert alert-error">Please enter your date of birth</div>';
+        errorDiv.style.display = 'block';
+        resultsDiv.style.display = 'none';
+        return;
+      }
+
+      const dob = new Date(dobInput);
+      const today = new Date();
+
+      // Validate date
+      if (dob > today) {
+        errorDiv.innerHTML = '<div class="alert alert-error">Date of birth cannot be in the future</div>';
+        errorDiv.style.display = 'block';
+        resultsDiv.style.display = 'none';
+        return;
+      }
+
+      // Calculate age
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      // Adjust for negative days
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      // Adjust for negative months
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // Calculate total days
+      const totalDays = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
+      const totalHours = totalDays * 24;
+      const totalMinutes = totalHours * 60;
+
+      // Calculate days until next birthday
+      let nextBirthday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+      if (nextBirthday < today) {
+        nextBirthday = new Date(today.getFullYear() + 1, dob.getMonth(), dob.getDate());
+      }
+      const daysUntil = Math.floor((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+      // Display results
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('days').textContent = days;
+      document.getElementById('totalDays').textContent = totalDays.toLocaleString();
+      document.getElementById('totalHours').textContent = totalHours.toLocaleString();
+      document.getElementById('totalMinutes').textContent = totalMinutes.toLocaleString();
+      
+      if (daysUntil === 0) {
+        document.getElementById('daysUntil').textContent = '🎉 Today is your birthday!';
+      } else {
+        document.getElementById('daysUntil').textContent = daysUntil + ' day' + (daysUntil !== 1 ? 's' : '');
+      }
+
+      resultsDiv.style.display = 'block';
+      errorDiv.style.display = 'none';
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('dob').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') calculateAge();
+    });
+  </script>
+</body>
+</html>

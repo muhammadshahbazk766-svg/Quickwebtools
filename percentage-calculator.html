@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage Calculator – Calculate Percentages Online Free</title>
+  <meta name="description" content="Use our free percentage calculator to calculate percentages, percentage increases and decreases quickly and accurately online. Simple, fast and mobile-friendly.">
+  <meta name="keywords" content="percentage calculator, calculate percentage, percentage increase, percentage decrease, percent off">
+  <meta name="author" content="QuickWebTools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quickwebtools.com/percentage-calculator.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Percentage Calculator – Free Online Tool">
+  <meta property="og:description" content="Calculate percentages, increases, and decreases instantly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quickwebtools.com/percentage-calculator.html">
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Percentage Calculator",
+    "description": "Free online percentage calculator for calculating percentages, increases, and decreases",
+    "url": "https://quickwebtools.com/percentage-calculator.html"
+  }
+  </script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="/" class="logo">QuickWebTools</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+        <a href="/#about">About</a>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container-narrow">
+    <h1>Percentage Calculator</h1>
+    <p class="text-muted">Calculate percentages, increases, and decreases instantly. Free, simple, and accurate.</p>
+
+    <!-- Ad: Top -->
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color);">
+      <button onclick="switchTab('tab1')" class="tab-btn active" style="background: none; border: none; padding: 1rem 0; cursor: pointer; color: var(--text-primary); border-bottom: 3px solid var(--primary-color); font-weight: 600;">What is X% of Y?</button>
+      <button onclick="switchTab('tab2')" class="tab-btn" style="background: none; border: none; padding: 1rem 0; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; font-weight: 600;">X is what % of Y?</button>
+      <button onclick="switchTab('tab3')" class="tab-btn" style="background: none; border: none; padding: 1rem 0; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; font-weight: 600;">Percentage Increase</button>
+      <button onclick="switchTab('tab4')" class="tab-btn" style="background: none; border: none; padding: 1rem 0; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; font-weight: 600;">Percentage Decrease</button>
+    </div>
+
+    <!-- Tab 1: What is X% of Y? -->
+    <div id="tab1" class="tab-content active">
+      <div class="calculator">
+        <h3>What is X% of Y?</h3>
+        
+        <div class="form-group">
+          <label for="percentage1">Percentage (%)</label>
+          <input type="number" id="percentage1" placeholder="e.g., 20" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="value1">Value</label>
+          <input type="number" id="value1" placeholder="e.g., 500" step="0.01">
+        </div>
+
+        <button onclick="calculatePercentageOf()" class="btn btn-block">Calculate</button>
+
+        <div id="result1" style="display: none;">
+          <div class="calculator-output">
+            <div class="calculator-output-label" id="label1"></div>
+            <div class="calculator-output-value" id="result1-value"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <h4>Example</h4>
+        <p><strong>What is 20% of 500?</strong></p>
+        <p>20% × 500 = 100</p>
+        <p>So 20% of 500 equals 100.</p>
+      </div>
+    </div>
+
+    <!-- Tab 2: X is what % of Y? -->
+    <div id="tab2" class="tab-content" style="display: none;">
+      <div class="calculator">
+        <h3>X is what % of Y?</h3>
+        
+        <div class="form-group">
+          <label for="part2">Value (Part)</label>
+          <input type="number" id="part2" placeholder="e.g., 100" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="whole2">Total Value (Whole)</label>
+          <input type="number" id="whole2" placeholder="e.g., 500" step="0.01">
+        </div>
+
+        <button onclick="calculatePercentageTo()" class="btn btn-block">Calculate</button>
+
+        <div id="result2" style="display: none;">
+          <div class="calculator-output">
+            <div class="calculator-output-label" id="label2"></div>
+            <div class="calculator-output-value" id="result2-value"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <h4>Example</h4>
+        <p><strong>100 is what percent of 500?</strong></p>
+        <p>(100 ÷ 500) × 100 = 20%</p>
+        <p>So 100 is 20% of 500.</p>
+      </div>
+    </div>
+
+    <!-- Tab 3: Percentage Increase -->
+    <div id="tab3" class="tab-content" style="display: none;">
+      <div class="calculator">
+        <h3>Percentage Increase</h3>
+        
+        <div class="form-group">
+          <label for="original3">Original Value</label>
+          <input type="number" id="original3" placeholder="e.g., 100" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="increase3">Increase by (%)</label>
+          <input type="number" id="increase3" placeholder="e.g., 20" step="0.01">
+        </div>
+
+        <button onclick="calculatePercentageIncrease()" class="btn btn-block">Calculate</button>
+
+        <div id="result3" style="display: none;">
+          <div class="calculator-output">
+            <div class="calculator-output-label" id="label3"></div>
+            <div class="calculator-output-value" id="result3-value"></div>
+          </div>
+          <p style="text-align: center; margin-top: 1rem;">
+            <span id="result3-detail"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <h4>Example</h4>
+        <p><strong>What is 100 increased by 20%?</strong></p>
+        <p>100 + (100 × 0.20) = 120</p>
+        <p>Increase of 20 = New value of 120</p>
+      </div>
+    </div>
+
+    <!-- Tab 4: Percentage Decrease -->
+    <div id="tab4" class="tab-content" style="display: none;">
+      <div class="calculator">
+        <h3>Percentage Decrease</h3>
+        
+        <div class="form-group">
+          <label for="original4">Original Value</label>
+          <input type="number" id="original4" placeholder="e.g., 100" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label for="decrease4">Decrease by (%)</label>
+          <input type="number" id="decrease4" placeholder="e.g., 20" step="0.01">
+        </div>
+
+        <button onclick="calculatePercentageDecrease()" class="btn btn-block">Calculate</button>
+
+        <div id="result4" style="display: none;">
+          <div class="calculator-output">
+            <div class="calculator-output-label" id="label4"></div>
+            <div class="calculator-output-value" id="result4-value"></div>
+          </div>
+          <p style="text-align: center; margin-top: 1rem;">
+            <span id="result4-detail"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <h4>Example</h4>
+        <p><strong>What is 100 decreased by 20%?</strong></p>
+        <p>100 - (100 × 0.20) = 80</p>
+        <p>Decrease of 20 = New value of 80</p>
+      </div>
+    </div>
+
+    <!-- Ad: Between Content -->
+    <div class="ad-container mt-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+
+    <!-- How to Calculate Percentages -->
+    <section class="section">
+      <h2>How to Calculate Percentages</h2>
+      
+      <h3>Basic Percentage Formula</h3>
+      <p>The basic formula for calculating a percentage is:</p>
+      <div class="card" style="background: var(--bg-primary); border: 2px solid var(--primary-color);">
+        <p style="font-family: monospace; text-align: center; margin: 0;"><strong>(Part ÷ Whole) × 100 = Percentage</strong></p>
+      </div>
+
+      <h3>Common Percentage Calculations</h3>
+      <ul>
+        <li><strong>Calculate a percentage of a number:</strong> (Percentage ÷ 100) × Number</li>
+        <li><strong>Find what percentage one number is of another:</strong> (Part ÷ Whole) × 100</li>
+        <li><strong>Calculate percentage increase:</strong> ((New Value - Old Value) ÷ Old Value) × 100</li>
+        <li><strong>Calculate percentage decrease:</strong> ((Old Value - New Value) ÷ Old Value) × 100</li>
+      </ul>
+
+      <h3>Real-World Examples</h3>
+      <ul>
+        <li><strong>Sales discount:</strong> A shirt costs $50. It's on sale for 30% off. How much do you save? 50 × 0.30 = $15 saved. New price: $35</li>
+        <li><strong>Tip calculation:</strong> Your bill is $80. You want to tip 20%. Tip amount: 80 × 0.20 = $16</li>
+        <li><strong>Grade calculation:</strong> You got 45 points out of 50. What's your percentage? (45 ÷ 50) × 100 = 90%</li>
+        <li><strong>Growth rate:</strong> Revenue was $10,000 last year, $12,000 this year. Growth: ((12,000 - 10,000) ÷ 10,000) × 100 = 20%</li>
+      </ul>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I calculate 15% off a price?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Multiply the original price by 0.15 to find the discount amount, then subtract from the original price. For example: $100 × 0.15 = $15 discount. Final price: $100 - $15 = $85.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What's the difference between percentage points and percent?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>A percentage point is an absolute difference. If something goes from 10% to 15%, that's a 5 percentage point increase. A percent (or relative change) would be: (15-10)÷10 × 100 = 50% increase.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I calculate a percentage increase?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Use this formula: ((New Value - Old Value) ÷ Old Value) × 100. Example: If a price goes from $50 to $75: ((75-50)÷50) × 100 = 50% increase.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I calculate percentages with decimals?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! Our calculator supports decimal numbers. You can calculate percentages with values like 25.5, 33.33, etc.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is there a quick way to calculate 10% of something?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! To find 10% of any number, just move the decimal point one place to the left. For example, 10% of 250 = 25. To find 20%, multiply that result by 2.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="section">
+      <h2>Related Tools</h2>
+      <div class="grid grid-2">
+        <a href="age-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Age Calculator</h3>
+          <p>Calculate your exact age in years, months, and days.</p>
+        </a>
+        <a href="bmi-calculator.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">BMI Calculator</h3>
+          <p>Calculate your Body Mass Index and health category.</p>
+        </a>
+        <a href="word-counter.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">Word Counter</h3>
+          <p>Count words, characters, and reading time.</p>
+        </a>
+        <a href="json-formatter.html" class="card" style="text-decoration: none;">
+          <h3 style="margin-top: 0; color: var(--primary-color);">JSON Formatter</h3>
+          <p>Format, validate, and minify JSON data.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Ad: Bottom -->
+    <div class="ad-container mt-4 mb-4">
+      <div class="ad-label">Advertisement</div>
+      <p style="margin: 0;">Your ad here</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>QuickWebTools</h4>
+        <p>Fast, free online tools for everyday tasks.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="age-calculator.html">Age Calculator</a></li>
+          <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+          <li><a href="word-counter.html">Word Counter</a></li>
+          <li><a href="json-formatter.html">JSON Formatter</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>More</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 QuickWebTools. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+      });
+      
+      // Deactivate all buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.style.color = 'var(--text-secondary)';
+        btn.style.borderBottomColor = 'transparent';
+      });
+      
+      // Show selected tab and activate button
+      document.getElementById(tabName).style.display = 'block';
+      event.target.style.color = 'var(--text-primary)';
+      event.target.style.borderBottomColor = 'var(--primary-color)';
+    }
+
+    function calculatePercentageOf() {
+      const percentage = parseFloat(document.getElementById('percentage1').value);
+      const value = parseFloat(document.getElementById('value1').value);
+      
+      if (!isValidNumber(percentage) || !isValidNumber(value)) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      
+      const result = (percentage / 100) * value;
+      document.getElementById('label1').textContent = `${percentage}% of ${value} =`;
+      document.getElementById('result1-value').textContent = formatNumber(result);
+      document.getElementById('result1').style.display = 'block';
+    }
+
+    function calculatePercentageTo() {
+      const part = parseFloat(document.getElementById('part2').value);
+      const whole = parseFloat(document.getElementById('whole2').value);
+      
+      if (!isValidNumber(part) || !isValidNumber(whole) || whole === 0) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      
+      const result = (part / whole) * 100;
+      document.getElementById('label2').textContent = `${part} is what % of ${whole}?`;
+      document.getElementById('result2-value').textContent = formatNumber(result) + '%';
+      document.getElementById('result2').style.display = 'block';
+    }
+
+    function calculatePercentageIncrease() {
+      const original = parseFloat(document.getElementById('original3').value);
+      const increase = parseFloat(document.getElementById('increase3').value);
+      
+      if (!isValidNumber(original) || !isValidNumber(increase)) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      
+      const increaseAmount = (increase / 100) * original;
+      const newValue = original + increaseAmount;
+      
+      document.getElementById('label3').textContent = `${original} increased by ${increase}%`;
+      document.getElementById('result3-value').textContent = formatNumber(newValue);
+      document.getElementById('result3-detail').textContent = `Increase of ${formatNumber(increaseAmount)}`;
+      document.getElementById('result3').style.display = 'block';
+    }
+
+    function calculatePercentageDecrease() {
+      const original = parseFloat(document.getElementById('original4').value);
+      const decrease = parseFloat(document.getElementById('decrease4').value);
+      
+      if (!isValidNumber(original) || !isValidNumber(decrease)) {
+        showNotification('Please enter valid numbers', 'error');
+        return;
+      }
+      
+      const decreaseAmount = (decrease / 100) * original;
+      const newValue = original - decreaseAmount;
+      
+      document.getElementById('label4').textContent = `${original} decreased by ${decrease}%`;
+      document.getElementById('result4-value').textContent = formatNumber(newValue);
+      document.getElementById('result4-detail').textContent = `Decrease of ${formatNumber(decreaseAmount)}`;
+      document.getElementById('result4').style.display = 'block';
+    }
+
+    // Allow Enter key to submit
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('percentage1')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageOf());
+      document.getElementById('value1')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageOf());
+      document.getElementById('part2')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageTo());
+      document.getElementById('whole2')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageTo());
+      document.getElementById('original3')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageIncrease());
+      document.getElementById('increase3')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageIncrease());
+      document.getElementById('original4')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageDecrease());
+      document.getElementById('decrease4')?.addEventListener('keypress', e => e.key === 'Enter' && calculatePercentageDecrease());
+    });
+  </script>
+</body>
+</html>
